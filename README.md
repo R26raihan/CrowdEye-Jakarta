@@ -1,5 +1,7 @@
 
-Here's the explanation in English with added emojis:
+
+
+![CrowdEYE](https://github.com/user-attachments/assets/61af7d68-c611-460f-8a4c-c6ee3c152d72)
 
 📊 Crowd Monitoring in Jakarta Using YOLOv8n Model
 This project focuses on real-time crowd monitoring in Jakarta 🇮🇩, utilizing the advanced YOLOv8n (You Only Look Once version 8 nano) model. This model is renowned for its efficiency and accuracy in detecting objects in various environments, making it an ideal choice for monitoring public spaces 🏙️.
