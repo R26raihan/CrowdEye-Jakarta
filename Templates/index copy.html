@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrowdEye Jakarta - Live CCTV Feed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e2f0d9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cctv {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            padding: 10px;
+            width: 640px; /* Width of each CCTV feed */
+            transition: transform 0.2s;
+        }
+        .cctv:hover {
+            transform: scale(1.02);
+        }
+        .cctv h2 {
+            text-align: center;
+            color: #16a085;
+        }
+        img {
+            width: 100%; /* Make the image responsive */
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #16a085;
+        }
+        .count-display {
+            text-align: center;
+            margin: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        @media (max-width: 768px) {
+            .cctv {
+                width: 90%; /* Adjust width for smaller screens */
+            }
+        }
+    </style>
+    <script>
+        function updateCounts() {
+            fetch('/person_count')
+            .then(response => response.json())
+            .then(data => {
+                for (let i = 0; i < Object.keys(data).length; i++) {
+                    document.getElementById(`count-${i}`).textContent = 
+                        `Persons: ${data[i].person}, Cars: ${data[i].car}`;
+                }
+            });
+        }
+
+        // Update every 5 seconds
+        setInterval(updateCounts, 5000);
+    </script>
+</head>
+<body>
+    <h1>CrowdEye Jakarta</h1>
+    <div class="container">
+        <div class="cctv">
+            <h2>CCTV 1</h2>
+            <img src="{{ url_for('video_feed', cctv_id=0) }}" alt="CCTV Stream 1">
+            <div class="count-display" id="count-0">Persons: 0, Cars: 0</div>
+        </div>
+        <div class="cctv">
+            <h2>CCTV 2</h2>
+            <img src="{{ url_for('video_feed', cctv_id=1) }}" alt="CCTV Stream 2">
+            <div class="count-display" id="count-1">Persons: 0, Cars: 0</div>
+        </div>
+        <div class="cctv">
+            <h2>CCTV 3</h2>
+            <img src="{{ url_for('video_feed', cctv_id=2) }}" alt="CCTV Stream 3">
+            <div class="count-display" id="count-2">Persons: 0, Cars: 0</div>
+        </div>
+        <div class="cctv">
+            <h2>CCTV 4</h2>
+            <img src="{{ url_for('video_feed', cctv_id=3) }}" alt="CCTV Stream 4">
+            <div class="count-display" id="count-3">Persons: 0, Cars: 0</div>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 CrowdEye Jakarta. All rights reserved.
+    </footer>
+</body>
+</html>
